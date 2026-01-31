@@ -10,6 +10,19 @@
 
 **Clarity for practitioners:** Content targets learners with a Computer Science / engineering background — explanations should be succinct, unambiguous, and include worked examples and diagrams where they aid comprehension.
 
+### Writing quality metrics
+
+All prose content (excluding code blocks, tables, and citations) must meet:
+
+| Metric | Target | Tool |
+|--------|--------|------|
+| Flesch-Kincaid Grade Level | 10–14 | `textstat` Python library |
+| Passive voice usage | ≤ 25% of sentences | `proselint` or `write-good` |
+| Sentence length | Average ≤ 25 words | `textstat` |
+| Broken links | 0 | `lychee` link checker in CI |
+
+**Enforcement:** CI runs `scripts/check-prose.py` on all `.md` files; PRs with violations are blocked.
+
 **User-centric personalization:** Personalization (via signup) must improve learning — content variants, difficulty, and suggested exercises adapt to declared software/hardware background.
 
 **Open and traceable AI assistance:** Any content generated or edited by AI tools must be labeled, include provenance (what tool & prompt), and link or cite sources used by the AI.
@@ -29,6 +42,12 @@
 - **Source traceability:** Every non-trivial factual claim or procedure must point to one or more sources (paper, docs, repo, dataset) or include a reproducible experiment.
 - **Citation style:** Use a consistent citation format across the book (recommendation: APA for text + clickable links in the web version).
 - **Originality:** No plagiarism — any reused text or images must have explicit permission or a license; attribute and license third-party materials clearly.
+- **Plagiarism detection:** Before merging content PRs, run `copyscape` API check OR manual verification against top-5 Google results for key phrases. Document check in PR comment.
+- **Citation link validation:** 
+  - CI runs `lychee --max-retries 3` weekly on all Markdown files.
+  - Stale links (404/410) generate GitHub issues with label `citation-maintenance`.
+  - Links must be fixed or replaced within 14 days.
+- **Source freshness:** For technical docs citations (ROS, NVIDIA), verify annually that linked version matches content. Track in `docs/citations-audit.md`.
 - **AI-authorship label:** If any section/paragraph/code was generated or substantially revised by an AI tool, add a short provenance note: tool name, prompt summary, and the sources the tool used.
 
 ### Code, simulations & notebooks
@@ -41,6 +60,16 @@
 ### RAG chatbot & data
 
 - **Provenance for answers:** The RAG bot must provide source snippets (with clickable links or slide/section references) for every factual answer and indicate confidence.
+
+**Confidence scale (required in RAG responses):**
+
+| Level | Label | Criteria |
+|-------|-------|----------|
+| High | ✅ Confident | ≥ 3 relevant chunks with cosine similarity > 0.85 |
+| Medium | ⚠️ Partial | 1–2 relevant chunks OR similarity 0.70–0.85 |
+| Low | ❓ Uncertain | No chunks > 0.70; response prefixed with "Based on limited evidence..." |
+| None | 🚫 No answer | No chunks > 0.50; respond "I don't have information about this in the book." |
+
 - **Scope control:** The bot must honor user-selected text scope: if the user selects text and asks a question, answers should be limited to that selection unless the user asks to broaden scope.
 - **No hallucinations policy:** If the system cannot find good evidence in the indexed content, it must respond with "I don't know / insufficient evidence" and optionally offer suggested search terms.
 - **Indexing hygiene:** Only index the book's approved content; do not index private user data or unrelated repositories. Keep an index update log and retention policy for embeddings.
@@ -345,9 +374,19 @@ Based on user responses, content is adapted as follows:
 | `weekly_hours: < 5 hours` | Suggest "Essential Path" (core content only); mark optional deep-dives clearly |
 | `weekly_hours: 20+ hours` | Suggest "Comprehensive Path" including all optional sections and bonus exercises |
 
-### A.3 Personalization vs. Translation Order
+### A.3 Personalization vs. Translation Order (Revised)
 
 **Rule:** Personalization is applied **before** translation.
+
+**Simplified translation scope:** To avoid combinatorial explosion:
+1. **Core path only:** Urdu translations are required only for the "Intermediate" personalization variant (default path).
+2. **Primers as separate pages:** Beginner primers (Python, Linux, etc.) are standalone pages with their own Urdu translations, not inline variants.
+3. **Machine translation fallback:** Advanced-only callouts may use machine translation with a visible badge: "🤖 Auto-translated".
+
+**Translation correction metric (clarified):**
+- A "correction" = any change to meaning, technical accuracy, or grammar (not stylistic preference).
+- Threshold: ≤ 5 corrections per 1,000 words in human review.
+- Tracked in Crowdin issue log with category tags.
 
 **Workflow:**
 1. User requests a chapter.
