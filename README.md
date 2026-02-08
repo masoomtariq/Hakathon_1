@@ -1,5 +1,6 @@
 # Physical AI & Humanoid Robotics — Interactive Docusaurus Book
 
+
 A modern, open-source educational textbook for learning robotics, AI, and physical systems.
 
 ## Quick Start
