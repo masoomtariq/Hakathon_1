@@ -3,6 +3,7 @@
 
 A modern, open-source educational textbook for learning robotics, AI, and physical systems.
 
+
 ## Quick Start
 
 ### Prerequisites
