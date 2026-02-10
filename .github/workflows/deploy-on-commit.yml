@@ -31,7 +31,7 @@ jobs:
           COMMIT_MSG=$(git log --format=%B -n 1)
           if [[ $COMMIT_MSG == *"[deploy-ci]"* ]]; then
             echo "deploy=true" >> $GITHUB_OUTPUT
-            echo "✅ Commit message contains [deploy] or [build] tag"
+            echo "✅ Commit message contains [deploy-ci] tag"
           else
             echo "deploy=false" >> $GITHUB_OUTPUT
             echo "⏭️  Skipping deployment (no [deploy] tag in commit message)"
@@ -42,6 +42,9 @@ jobs:
     needs: check-message
     if: needs.check-message.outputs.should-deploy == 'true'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: book_source
     outputs:
       build-success: ${{ steps.build.outcome == 'success' }}
     steps:
@@ -55,6 +58,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: 'book_source/package-lock.json'
 
       - name: Install dependencies
         run: npm ci
@@ -71,7 +75,7 @@ jobs:
         if: steps.build.outcome == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: book_source/build
 
       - name: Upload artifact (last successful build)
         if: steps.build.outcome == 'failure'
