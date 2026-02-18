@@ -74,6 +74,37 @@
 
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
+- How does chatbot handle user-selected text with partial or ambiguous context?
+- How does retrieval degrade when relevant source passages are missing or low-confidence?
+
+## Curriculum Coverage Matrix *(mandatory)*
+
+List explicit scope and ownership for each required module. No row may be left undefined.
+
+| Module | In Scope (Y/N) | Spec Section | Validation Method |
+|--------|-----------------|--------------|-------------------|
+| ROS 2 | [Y/N] | [section] | [test/check] |
+| Gazebo or Unity | [Y/N] | [section] | [test/check] |
+| NVIDIA Isaac | [Y/N] | [section] | [test/check] |
+| Vision-Language-Action (VLA) | [Y/N] | [section] | [test/check] |
+| Weekly Breakdown | [Y/N] | [section] | [test/check] |
+| Assessments | [Y/N] | [section] | [test/check] |
+
+## Output Contract *(mandatory)*
+
+- All educational output MUST be Markdown or MDX and use deterministic heading hierarchy.
+- Each module MUST include learning outcomes, explanatory content, worked examples,
+  exercises, and references.
+- Any generated content format deviations MUST be treated as blocking defects.
+
+## Reusable Skills *(mandatory)*
+
+- Define how the feature uses or updates reusable skills for:
+  - content generation
+  - Urdu translation
+  - RAG querying
+  - personalization
+- For each skill, specify input contract, output contract, and evaluation criteria.
 
 ## Requirements *(mandatory)*
 

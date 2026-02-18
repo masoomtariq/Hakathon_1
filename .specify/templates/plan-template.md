@@ -31,7 +31,17 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- SDD-RI primacy enforced: spec artifacts exist before implementation tasks.
+- P+Q+P evidence present: problem framing, validation questions, and proof artifacts.
+- Output contract defined: Markdown or MDX content structure is testable.
+- Curriculum coverage matrix includes ROS 2, Gazebo or Unity, NVIDIA Isaac, VLA,
+  weekly breakdown, and assessments.
+- Execution decomposition uses atomic tasks with explicit checkpoints.
+- No vibe coding risk: each planned change maps to a requirement.
+- Reusable skills planned: content generation, Urdu translation, RAG querying,
+  personalization.
+- Success criteria include GitHub Pages deployment, chatbot answer quality,
+  and bonus capability operability.
 
 ## Project Structure
 
