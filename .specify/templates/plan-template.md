@@ -34,14 +34,19 @@
 - SDD-RI primacy enforced: spec artifacts exist before implementation tasks.
 - P+Q+P evidence present: problem framing, validation questions, and proof artifacts.
 - Output contract defined: Markdown or MDX content structure is testable.
+- Writing quality thresholds defined: Flesch-Kincaid 10-12, >=75% active voice,
+  <=10% sentences over 25 words.
 - Curriculum coverage matrix includes ROS 2, Gazebo or Unity, NVIDIA Isaac, VLA,
   weekly breakdown, and assessments.
+- Coverage is mapped to learning objectives in `docs/curriculum.md`.
 - Execution decomposition uses atomic tasks with explicit checkpoints.
 - No vibe coding risk: each planned change maps to a requirement.
 - Reusable skills planned: content generation, Urdu translation, RAG querying,
   personalization.
-- Success criteria include GitHub Pages deployment, chatbot answer quality,
-  and bonus capability operability.
+- Citation and source verification defined: IEEE style citations and multi-source
+  verification for safety-critical or contested claims.
+- Success criteria include Vercel deployment for the book, Hugging Face Spaces
+  deployment for backend/chatbot, chatbot answer quality, and bonus capability operability.
 
 ## Project Structure
 
