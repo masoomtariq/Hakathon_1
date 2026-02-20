@@ -80,6 +80,7 @@
 ## Curriculum Coverage Matrix *(mandatory)*
 
 List explicit scope and ownership for each required module. No row may be left undefined.
+All module coverage MUST map to corresponding learning objectives in `docs/curriculum.md`.
 
 | Module | In Scope (Y/N) | Spec Section | Validation Method |
 |--------|-----------------|--------------|-------------------|
@@ -95,6 +96,9 @@ List explicit scope and ownership for each required module. No row may be left u
 - All educational output MUST be Markdown or MDX and use deterministic heading hierarchy.
 - Each module MUST include learning outcomes, explanatory content, worked examples,
   exercises, and references.
+- Explanatory prose MUST target Flesch-Kincaid grade level 10-12, >=75% active voice,
+  and <=10% sentences longer than 25 words.
+- Factual claims MUST use IEEE-style citations and meet source verification standards.
 - Any generated content format deviations MUST be treated as blocking defects.
 
 ## Reusable Skills *(mandatory)*
