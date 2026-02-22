@@ -1,0 +1,19 @@
+user:
+  name: masoomtariq
+  title: Book maintainer and curriculum architect
+  url: https://github.com/masoomtariq
+  image_url: https://github.com/masoomtariq.png
+  page: true
+  socials:
+    x: x
+    linkedin: linkedin
+    github: masoomtariq
+
+claude:
+  name: Claude
+  title: AI pair engineer for scaffold delivery
+  url: https://docs.anthropic.com/en/docs/claude-code
+  image_url: https://avatars.githubusercontent.com/u/0000000?v=4
+  page: true
+  socials:
+    github: anthropics

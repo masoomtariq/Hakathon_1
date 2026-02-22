@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  title: Book Scaffold Validation API
+  version: 0.1.0
+  description: >-
+    Contract for scaffold generation and validation operations used by the
+    Foundation & Core Skeleton feature.
+servers:
+  - url: https://local.tools.invalid
+paths:
+  /v1/scaffold/generate:
+    post:
+      summary: Generate docs and sidebar from structure source
+      operationId: generateScaffold
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRequest'
+      responses:
+        '200':
+          description: Generation completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateResponse'
+        '400':
+          description: Invalid structure source or duplicate IDs
+  /v1/scaffold/validate:
+    post:
+      summary: Validate structure parity and metadata completeness
+      operationId: validateScaffold
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateRequest'
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateResponse'
+  /v1/scaffold/check-links:
+    post:
+      summary: Validate internal links and code repository URLs
+      operationId: checkLinks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkCheckRequest'
+      responses:
+        '200':
+          description: Link check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkCheckResponse'
+  /v1/scaffold/check-homepage:
+    post:
+      summary: Validate required homepage section ordering
+      operationId: checkHomepageStructure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HomepageCheckRequest'
+      responses:
+        '200':
+          description: Homepage contract check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomepageCheckResponse'
+components:
+  schemas:
+    GenerateRequest:
+      type: object
+      required: [structureSourcePath, outputDocsPath, outputSidebarPath]
+      properties:
+        structureSourcePath:
+          type: string
+          example: docs/structure.md
+        outputDocsPath:
+          type: string
+          example: book_source/docs
+        outputSidebarPath:
+          type: string
+          example: book_source/sidebars.ts
+    GenerateResponse:
+      type: object
+      required: [generatedPages, generatedModules, warnings]
+      properties:
+        generatedPages:
+          type: integer
+        generatedModules:
+          type: integer
+        warnings:
+          type: array
+          items:
+            type: string
+    ValidateRequest:
+      type: object
+      required: [structureSourcePath, docsPath]
+      properties:
+        structureSourcePath:
+          type: string
+        docsPath:
+          type: string
+    ValidateResponse:
+      type: object
+      required: [coveragePercent, orderingMismatches, missingFrontmatter, invalidFrontmatter]
+      properties:
+        coveragePercent:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        orderingMismatches:
+          type: integer
+          minimum: 0
+        missingFrontmatter:
+          type: integer
+          minimum: 0
+        invalidFrontmatter:
+          type: integer
+          minimum: 0
+    LinkCheckRequest:
+      type: object
+      required: [docsPath, includeExternal]
+      properties:
+        docsPath:
+          type: string
+        includeExternal:
+          type: boolean
+          default: true
+    LinkCheckResponse:
+      type: object
+      required: [brokenInternalLinks, brokenCodeRepoLinks]
+      properties:
+        brokenInternalLinks:
+          type: integer
+          minimum: 0
+        brokenCodeRepoLinks:
+          type: integer
+          minimum: 0
+    HomepageCheckRequest:
+      type: object
+      required: [pagePath, expectedSectionOrder]
+      properties:
+        pagePath:
+          type: string
+          example: book_source/src/pages/index.tsx
+        expectedSectionOrder:
+          type: array
+          items:
+            type: string
+          example:
+            - Hero
+            - Book Summary
+            - Learning Outcomes
+            - Quotes
+            - Module Cards
+            - Reading/Learning Path
+    HomepageCheckResponse:
+      type: object
+      required: [isValid, missingSections, orderMismatchCount]
+      properties:
+        isValid:
+          type: boolean
+        missingSections:
+          type: array
+          items:
+            type: string
+        orderMismatchCount:
+          type: integer
+          minimum: 0

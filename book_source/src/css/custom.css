@@ -1,0 +1,64 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #7c8cff;
+  --ifm-color-primary-dark: #6878f0;
+  --ifm-color-primary-darker: #5d6fe8;
+  --ifm-color-primary-darkest: #4a59d1;
+  --ifm-color-primary-light: #8f9dff;
+  --ifm-color-primary-lighter: #9ba7ff;
+  --ifm-color-primary-lightest: #b0bbff;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-background-color: #f8f9ff;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #9ba7ff;
+  --ifm-color-primary-dark: #8794ff;
+  --ifm-color-primary-darker: #7a89ff;
+  --ifm-color-primary-darkest: #6272ff;
+  --ifm-color-primary-light: #aab5ff;
+  --ifm-color-primary-lighter: #b8c1ff;
+  --ifm-color-primary-lightest: #ced4ff;
+  --ifm-background-color: #0f1220;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter/Inter-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Nastaliq Urdu';
+  src: url('/fonts/noto-nastaliq-urdu/NotoNastaliqUrdu-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.urdu-sample {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  font-size: 1.3rem;
+  line-height: 1.9;
+}
